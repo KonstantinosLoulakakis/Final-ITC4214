@@ -1,0 +1,29 @@
+{%extends "index.html"%}
+{% load static %}
+{%block style%}
+    <link rel="stylesheet" href="{% static 'Final/css/forms.css'%}">
+{%endblock%}
+{%block main%}
+    {% comment %} just the login page takes username password and redirects to register page also if the user wants  {% endcomment %}
+    <div class="container">
+        <div class="box">
+            <h1>Login</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {% comment %} {{ form.as_p }} {% endcomment %}
+                <div class="form-group">
+                    <label for="username">{{form.username.label}}</label>
+                    {{form.username}}
+                </div>
+                <div class="form-group">
+                    <label for="password">{{ form.password.label }}</label>
+                    {{ form.password }}
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <div id="link">
+                    <a href="{% url 'register' %}">Dont have an Account? Create Here!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{%endblock%}

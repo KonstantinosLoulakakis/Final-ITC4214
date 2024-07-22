@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{%block style%}
+    <link rel="stylesheet" href="../static/Final/css/account.css">
+{%endblock%}
+{%block main%}
+    <div class="container">
+        {% comment %} displays the account information and also allows the user to login logout register according to their status {% endcomment %}
+        <h1>Welcome</h1>
+        {% if request.user.is_authenticated %}
+            <p>{{ request.user.username }}</p>
+            <a href="{% url 'logout' %}" class="btn-primary" id="button">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn-primary" id="button">Login</a>
+            <a href="{% url 'register' %}" class="btn-primary" id="button">Register</a>
+        {% endif %}
+
+        
+    </div>
+{%endblock%}

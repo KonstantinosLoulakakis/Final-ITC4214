@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'Final/css/items.css' %}">  
+{% endblock %}
+{% comment %} just the search bar {% endcomment %}
+{% block main %}
+<div class='searchbar'>
+    <form id="addForm" class="form-inline" action="{% url 'products' %}" method="get">
+        <div class="form-group mr-2">
+            {% csrf_token %}
+            <input type="text" id="productName" name="q" class="form-control" placeholder="Search Item">
+            <button id="search-button" type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
+{% comment %} the containers with all the products. takes their info and dispays them to this page {% endcomment %}
+<div class="container-fluid" id="items">
+    <ul class="product-list">
+        {% for product in products %}
+            <li class="product-item">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+
+                <a href="{% url 'cart:add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

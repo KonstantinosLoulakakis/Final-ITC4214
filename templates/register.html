@@ -1,0 +1,34 @@
+{%extends "index.html"%}
+{% load static %}
+{%block style%}
+    <link rel="stylesheet" href="{% static 'Final/css/forms.css'%}">
+{%endblock%}
+{%block main%}
+    {% comment %} register page is similar to the login page but with a bit more info for the user to register {% endcomment %}
+    <div class="container">
+        <div class="box">
+            <h1>Register</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {% comment %} {{ form.as_p }}  {% endcomment %}
+                <div class="form-group">
+                    <label for="username">{{form.username.label}}</label>
+                    {{form.username}}
+                </div>
+                <div class="form-group">
+                    <label for="password1">{{form.password1.label}}</label>
+                    {{form.password1}}
+                </div>
+                <div class="form-group">
+                    <label for="password2">{{form.password2.label}}</label>
+                    {{form.password2}}
+                </div> 
+                <button type="submit" class="btn-primary" >Signup</button>
+                <div id="link">
+                    <a href="{% url 'login' %}">Already have an account?</a>
+                </div>    
+            </form>
+        </div>
+    </div>
+{%endblock%}
+
